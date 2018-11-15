@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Trending Food</string>
+
+    <string-array name="province_array">
+        <item>Please select your province</item>
+        <item>Western</item>
+        <item>Northern</item>
+        <item>North Western	</item>
+        <item>North Central</item>
+        <item>Central</item>
+        <item>Sabaragamuwa</item>
+        <item>Eastern</item>
+        <item>Uva</item>
+        <item>Southern</item>
+    </string-array>
+
+    <string-array name="district_western">
+        <item>Please select your district</item>
+        <item>Gampaha</item>
+        <item>Colombo</item>
+        <item>Kalutara	</item>
+    </string-array>
+
+    <string-array name="district_northern">
+        <item>Please select your district</item>
+        <item>Jaffna</item>
+        <item>Kilinochchi</item>
+        <item>Mannar	</item>
+        <item>Mullaitivu</item>
+        <item>Vavuniya</item>
+    </string-array>
+
+    <string-array name="district_northwestern">
+        <item>Please select your district</item>
+        <item>Puttalam</item>
+        <item>Kurunegala</item>
+    </string-array>
+
+    <string-array name="town_array">
+        <item>Please select your province</item>
+        <item>Western</item>
+        <item>Northern</item>
+        <item>North Western	</item>
+        <item>North Central</item>
+        <item>Central</item>
+        <item>Sabaragamuwa</item>
+        <item>Eastern</item>
+        <item>Uva</item>
+        <item>Southern</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>Please select your district</item>
+        <item>Farmer</item>
+        <item>Retailer</item>
+        <item>Consumer	</item>
+    </string-array>
+
+
+    <string name="title_activity_farmers__home">Farmers Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_consumer__home">Consumer_Home</string>
+    <string name="title_activity_retails__home">Retails_Home</string>
+    <string name="title_activity_profile_">Profile Activity</string>
+</resources>

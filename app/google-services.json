@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "137162116671",
+    "firebase_url": "https://trendingfood-4392a.firebaseio.com",
+    "project_id": "trendingfood-4392a",
+    "storage_bucket": "trendingfood-4392a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137162116671:android:fad35c4fd2682e4f",
+        "android_client_info": {
+          "package_name": "com.site11.funwithultimate.trendingfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137162116671-6backr3mvnsfv8imj1uctgj493v7bqr3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.site11.funwithultimate.trendingfood",
+            "certificate_hash": "b19accab75535441dc68d58cfe869fe4be8da4cc"
+          }
+        },
+        {
+          "client_id": "137162116671-52lsgbblap3sggl4qfmku13qlg0e9brb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAP-GvJwwFxNfIMPvTN34bXPuIHlRHpm8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137162116671-52lsgbblap3sggl4qfmku13qlg0e9brb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

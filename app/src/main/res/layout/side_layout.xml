@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/headingimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/farmersc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:id="@+id/headingtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headingimg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Heading"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/paratxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headingtxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:padding="35dp"
+        android:text="We can Manage our Food Production
+So We cant go sahead
+We can Manage our Food Production"
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18dp" />
+
+</RelativeLayout>

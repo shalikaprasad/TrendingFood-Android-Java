@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_contacts"
+            android:title="Friends" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_message"
+            android:title="Message" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_notifications"
+            android:title="Notifications" />
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+    <item android:title="My Trend">
+        <menu>
+            <item
+                android:id="@+id/fnav_saved"
+                android:icon="@drawable/ic_saved"
+                android:title="Saved" />
+
+            <item
+                android:id="@+id/fnav_share"
+                android:icon="@drawable/ic_sell"
+                android:title="Selling" />
+
+            <item
+                android:id="@+id/fnav_send"
+                android:icon="@drawable/ic_bids"
+                android:title="Bids and Offer" />
+        </menu>
+    </item>
+    </group>
+</menu>

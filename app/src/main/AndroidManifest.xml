@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.site11.funwithultimate.trendingfood">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppThemebody">
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ForgotActivity"
+            android:label="Login"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SignUpActivity"
+            android:label="Login"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Home.Farmers.Farmers_Home"
+            android:label="@string/title_activity_farmers__home"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppThemebody.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.site11.funwithultimate.trendingfood.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".Home.Consumers.Consumer_Home"
+            android:label="@string/title_activity_consumer__home"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppThemebody.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.site11.funwithultimate.trendingfood.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".Home.Retailers.Retails_Home"
+            android:label="@string/title_activity_retails__home"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppThemebody.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.site11.funwithultimate.trendingfood.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".Profile_Activity"
+            android:label="@string/title_activity_profile_"
+            android:theme="@style/AppThemebody.NoActionBar" />
+        <activity
+            android:name=".onBoardingScreen"
+            android:label="OnBoarding Screen"
+            android:theme="@style/AppTheme"/>
+    </application>
+
+</manifest>
