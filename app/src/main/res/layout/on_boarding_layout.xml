@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:id="@+id/dots"
-        android:layout_width="105dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignBottom="@+id/pageview"
         android:layout_centerHorizontal="true"
@@ -32,9 +32,8 @@
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_weight="1"
         android:background="@color/transparent"
-        android:text="Back"
+        android:text=""
         android:textColor="@color/white" />
 
     <Button
@@ -43,7 +42,7 @@
         android:layout_height="40dp"
         android:layout_alignTop="@+id/dots"
         android:layout_alignParentEnd="true"
-        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
         android:background="@color/transparent"
         android:text="Next"
         android:textColor="@color/white" />

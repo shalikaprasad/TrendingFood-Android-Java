@@ -46,6 +46,7 @@ public class onBoardingScreen extends Activity {
             @Override
             public void onClick(View v) {
                 viewpage.setCurrentItem(currentPage + 1);
+
             }
         });
 
@@ -57,15 +58,14 @@ public class onBoardingScreen extends Activity {
         });
 
 
-
-
     }
 
     public void addDotIndicator(int position) {
 
         dots = new TextView[3];
+        linearLayout.removeAllViews();
 
-        for(int i=0; i< dots.length; i++){
+        for(int i=0; i < dots.length; i++){
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(35);
@@ -73,7 +73,7 @@ public class onBoardingScreen extends Activity {
 
             linearLayout.addView(dots[i]);
 
-            finishgetnew(i);
+
         }
         if(dots.length > 0){
             dots[position].setTextColor(getResources().getColor(R.color.white));
@@ -88,24 +88,35 @@ public class onBoardingScreen extends Activity {
 
         @Override
         public void onPageSelected(int i) {
-            i=i-1;
+
             addDotIndicator(i);
 
-            currentPage = 0;
+            currentPage = i;
             if(i == 0){
                 nextbtn.setEnabled(true);
                 backbtn.setEnabled(false);
                 backbtn.setVisibility(View.INVISIBLE);
 
                 nextbtn.setText("Next");
-                backbtn.setText("Back");
-            }else if(i == dots.length){
+                backbtn.setText("");
+
+            }else if(i == dots.length-1){
                 nextbtn.setEnabled(true);
-                backbtn.setEnabled(false);
+                backbtn.setEnabled(true);
                 backbtn.setVisibility(View.VISIBLE);
 
                 nextbtn.setText("Finish");
                 backbtn.setText("Back");
+
+                nextbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent ii = new Intent(onBoardingScreen.this,LoginActivity.class);
+                        startActivity(ii);
+                    }
+                });
+
+
             }else{
                 nextbtn.setEnabled(true);
                 backbtn.setEnabled(true);
@@ -114,6 +125,7 @@ public class onBoardingScreen extends Activity {
                 nextbtn.setText("Next");
                 backbtn.setText("Back");
             }
+
         }
 
         @Override
@@ -122,10 +134,5 @@ public class onBoardingScreen extends Activity {
         }
     };
 
-    public void finishgetnew(int i){
-        if(i == dots.length){
-            Intent ii = new Intent(onBoardingScreen.this,LoginActivity.class);
-            startActivity(ii);
-        }
-    }
+
 }
