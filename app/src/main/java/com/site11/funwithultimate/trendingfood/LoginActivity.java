@@ -29,6 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.site11.funwithultimate.trendingfood.Home.Consumers.Consumer_Home;
+import com.site11.funwithultimate.trendingfood.Home.Farmer.Farmers_Home;
 import com.site11.funwithultimate.trendingfood.Home.Retailers.Retails_Home;
 
 import dmax.dialog.SpotsDialog;
@@ -183,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void loginbtn(View view) {
         if (category_no == 0) {
-            Intent i = new Intent(LoginActivity.this, Retails_Home.class);
+            Intent i = new Intent(LoginActivity.this, Farmers_Home.class);
             startActivity(i);
         } else if (category_no == 1) {
             Intent i = new Intent(LoginActivity.this, Retails_Home.class);

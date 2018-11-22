@@ -151,17 +151,19 @@ public class Retails_Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.navside_home_farmer) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.navside_friends_farmer) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.navside_message_farmer) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.navside_notification_farmer) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.navside_saved_farmer) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.navside_sell_farmer) {
+
+        }else if (id == R.id.navside_bid_farmer) {
 
         }
 

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/faction_settings"
+        android:id="@+id/raction_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
-        android:id="@+id/faction_help"
+        android:id="@+id/raction_help"
         android:orderInCategory="100"
         android:title="Help"
         app:showAsAction="never" />
     <item
-        android:id="@+id/faction_logout"
+        android:id="@+id/raction_logout"
         android:orderInCategory="100"
         android:title="Logout"
         app:showAsAction="never" />
