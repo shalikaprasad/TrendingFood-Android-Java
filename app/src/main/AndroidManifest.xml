@@ -68,7 +68,16 @@
         <activity
             android:name=".onBoardingScreen"
             android:label="OnBoarding Screen"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Home.Farmer.Farmers_Home"
+            android:label="@string/title_activity_farmers__home"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppThemebody.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.site11.funwithultimate.trendingfood.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>

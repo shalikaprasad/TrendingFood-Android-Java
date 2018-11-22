@@ -11,4 +11,5 @@
 
     <color name="rose">#FF4001</color>
     <color name="trans_sc">#cccccc</color>
+    <color name="transwhite">#80ffffff</color>
 </resources>

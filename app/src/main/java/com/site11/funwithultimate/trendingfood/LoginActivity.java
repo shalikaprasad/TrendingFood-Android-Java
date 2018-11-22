@@ -29,7 +29,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.site11.funwithultimate.trendingfood.Home.Consumers.Consumer_Home;
-import com.site11.funwithultimate.trendingfood.Home.Farmers.Farmers_Home;
 import com.site11.funwithultimate.trendingfood.Home.Retailers.Retails_Home;
 
 import dmax.dialog.SpotsDialog;
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Intent intent = new Intent(LoginActivity.this,Farmers_Home.class);
+                            Intent intent = new Intent(LoginActivity.this,Retails_Home.class);
                             intent.putExtra("email",authResult.getUser().getEmail());
                             startActivity(intent);
                         }
@@ -184,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void loginbtn(View view) {
         if (category_no == 0) {
-            Intent i = new Intent(LoginActivity.this, Farmers_Home.class);
+            Intent i = new Intent(LoginActivity.this, Retails_Home.class);
             startActivity(i);
         } else if (category_no == 1) {
             Intent i = new Intent(LoginActivity.this, Retails_Home.class);
@@ -195,6 +194,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
 
     }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
