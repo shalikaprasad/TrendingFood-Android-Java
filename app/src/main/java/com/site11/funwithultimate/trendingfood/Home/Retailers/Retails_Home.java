@@ -138,7 +138,13 @@ public class Retails_Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.raction_summery) {
+            return true;
+        }else if (id == R.id.raction_settings) {
+            return true;
+        }else if (id == R.id.raction_help) {
+            return true;
+        }else if (id == R.id.raction_logout) {
             return true;
         }
 
@@ -151,19 +157,19 @@ public class Retails_Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.navside_home_farmer) {
+        if (id == R.id.navside_home_retailer) {
             // Handle the camera action
-        } else if (id == R.id.navside_friends_farmer) {
+        } else if (id == R.id.navside_friends_retailer) {
 
-        } else if (id == R.id.navside_message_farmer) {
+        } else if (id == R.id.navside_message_retailer) {
 
-        } else if (id == R.id.navside_notification_farmer) {
+        } else if (id == R.id.navside_notification_retailer) {
 
-        } else if (id == R.id.navside_saved_farmer) {
+        } else if (id == R.id.navside_saved_retailer) {
 
-        } else if (id == R.id.navside_sell_farmer) {
+        } else if (id == R.id.navside_sell_retailer) {
 
-        }else if (id == R.id.navside_bid_farmer) {
+        }else if (id == R.id.navside_bid_retailer) {
 
         }
 

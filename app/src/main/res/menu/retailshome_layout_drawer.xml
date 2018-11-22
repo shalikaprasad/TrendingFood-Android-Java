@@ -3,48 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:id="@+id/menu_top"
+    <group android:id="@+id/menu_topr"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/navside_home_retailer"
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/navside_friends_retailer"
             android:icon="@drawable/ic_contacts"
             android:title="Friends" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/navside_message_retailer"
             android:icon="@drawable/ic_message"
             android:title="Message" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/navside_notification_retailer"
             android:icon="@drawable/ic_notifications"
             android:title="Notifications" />
     </group>
 
     <group
-        android:id="@+id/menu_bottom"
+        android:id="@+id/menu_bottomr"
         android:checkableBehavior="none">
 
         <item android:title="My Trend">
             <menu>
                 <item
-                    android:id="@+id/fnav_saved"
+                    android:id="@+id/navside_saved_retailer"
                     android:icon="@drawable/ic_saved"
                     android:title="Saved" />
 
                 <item
-                    android:id="@+id/fnav_share"
+                    android:id="@+id/navside_sell_retailer"
                     android:icon="@drawable/ic_sell"
                     android:title="Selling" />
 
                 <item
-                    android:id="@+id/fnav_send"
+                    android:id="@+id/navside_bid_retailer"
                     android:icon="@drawable/ic_bids"
                     android:title="Bids and Offer" />
             </menu>
         </item>
     </group>
-
 </menu>

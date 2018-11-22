@@ -141,7 +141,13 @@ public class Farmers_Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.faction_summery) {
+            return true;
+        }else if (id == R.id.faction_settings) {
+            return true;
+        }else if (id == R.id.faction_help) {
+            return true;
+        }else if (id == R.id.faction_logout) {
             return true;
         }
 

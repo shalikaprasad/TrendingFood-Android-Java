@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/raction_summery"
+        android:orderInCategory="100"
+        android:title="Summery"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/raction_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
