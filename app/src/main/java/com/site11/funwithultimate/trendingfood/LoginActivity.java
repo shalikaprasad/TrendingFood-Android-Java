@@ -1,7 +1,12 @@
 package com.site11.funwithultimate.trendingfood;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,8 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -46,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     RelativeLayout rellay1, rellay2;
     Spinner category;
     int category_no = 0;
+    boolean connected;
 
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -89,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Intent intent = new Intent(LoginActivity.this,Retails_Home.class);
+                            Intent intent = new Intent(LoginActivity.this,Farmers_Home.class);
                             intent.putExtra("email",authResult.getUser().getEmail());
                             startActivity(intent);
                         }
@@ -112,6 +120,26 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         signInButton = (SignInButton) findViewById(R.id.google_sign) ;
         handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
 
+
+
+
+        //////////////////////////////////////////////
+        //////////Check Internet Connection///////////
+        //////////////////////////////////////////////
+        checkConnection();
+        if(connected == false){
+           //alertInternet();
+            CheckInternet alert1 = new CheckInternet();
+            alert1.showDialog(LoginActivity.this, "Warning");
+
+     }
+
+
+
+
+        //////////////////////////////////////////////
+        //////////Select Category/////////////////////
+        //////////////////////////////////////////////
 
         ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(LoginActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.category));
@@ -204,6 +232,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onBackPressed() {
-
+        ViewDialog alert = new ViewDialog();
+        alert.showDialog(LoginActivity.this, "Warning");
     }
+
+
+
+    /////////////////////////////////////////////
+    //////////Check Internet/////////////////////
+    /////////////////////////////////////////////
+    private void checkConnection(){
+        connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
+    }
+
+
+
+
 }
