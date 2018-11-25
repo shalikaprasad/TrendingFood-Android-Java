@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     SignInButton signInButton;
     FirebaseAuth firebaseAuth;
 
-    //Create Dialog
+    //Create Dialog Box
     AlertDialog waitingDialog;
     RelativeLayout rellay1, rellay2;
     Spinner category;
@@ -64,6 +64,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     };
 
+    /////////////////////////////////////////////
+    //////////GoogleSign In/////////////////////
+    /////////////////////////////////////////////
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -90,6 +93,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         }
     }
+
+    /////////////////////////////////////////////
+    //////////Pass Email to Home Activity///////
+    /////////////////////////////////////////////
 
     private void firebaseAuthWithGoogle(AuthCredential credential) {
 
@@ -164,7 +171,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        //GoogleSign In
+
+        /////////////////////////////////////////////
+        //////////GoogleSign In/////////////////////
+        /////////////////////////////////////////////
         configureGoogleSignIn();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -179,8 +189,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .setMessage("Please wait...")
                 .setCancelable(false)
                 .build();
-
-
     }
 
     private void signIn() {
@@ -200,15 +208,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         googleClient.connect();
     }
 
+
+
+    /////////////////////////////////////////////
+    //////////SignUp Activity/////////////////////
+    /////////////////////////////////////////////
     public void signupbtn(View view) {
         Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(i);
     }
 
+    /////////////////////////////////////////////
+    //////////Forgotten Activity/////////////////////
+    /////////////////////////////////////////////
     public void forgotbtn(View view) {
         Intent i = new Intent(LoginActivity.this, ForgotActivity.class);
         startActivity(i);
     }
+
+    /////////////////////////////////////////////
+    //////////Open Home activity/////////////////
+    /////////////////////////////////////////////
 
     public void loginbtn(View view) {
         if (category_no == 0) {
@@ -225,11 +245,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "" + connectionResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
-    }
 
+
+    /////////////////////////////////////////////
+    //////////Back Button////////////////////////
+    /////////////////////////////////////////////
     @Override
     public void onBackPressed() {
         ViewDialog alert = new ViewDialog();
@@ -251,6 +271,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
         else
             connected = false;
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(this, "" + connectionResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
     }
 
 
