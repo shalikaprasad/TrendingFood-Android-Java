@@ -18,6 +18,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,8 +30,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +57,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     Spinner category;
     int category_no = 0;
     boolean connected;
+
+    EditText loguser,logpass;
+
 
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -87,9 +93,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             }else {
                 waitingDialog.dismiss();
-
-                Log.e("EDMT_ERROR","Login failed");
-                Log.e("EDMT_ERROR",result.getStatus().getStatusMessage());
+                Toast.makeText(
+                        LoginActivity.this,
+                        "Login Failed",
+                        Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -127,6 +134,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         signInButton = (SignInButton) findViewById(R.id.google_sign) ;
         handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
 
+        loguser = findViewById(R.id.logusermaneedit);
+        logpass = findViewById(R.id.logpasswordedit);
+
 
 
 
@@ -138,8 +148,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
            //alertInternet();
             CheckInternet alert1 = new CheckInternet();
             alert1.showDialog(LoginActivity.this, "Warning");
-
-     }
+     }else{
+            Toast.makeText(
+                    LoginActivity.this,
+                    "Connected",
+                    Toast.LENGTH_LONG).show();
+        }
 
 
 
@@ -232,8 +246,48 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void loginbtn(View view) {
         if (category_no == 0) {
-            Intent i = new Intent(LoginActivity.this, Farmers_Home.class);
-            startActivity(i);
+            final String email = loguser.getText().toString();
+            final String password = logpass.getText().toString();
+
+            try {
+
+                if (password.length() > 0 && email.length() > 0) {
+
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(
+                                                LoginActivity.this,
+                                                "Authentication Failed",
+                                                Toast.LENGTH_LONG).show();
+
+                                    } else {
+                                        Toast.makeText(
+                                                LoginActivity.this,
+                                                "Login Successfully",
+                                                Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(LoginActivity.this, Farmers_Home.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                }
+                            });
+                } else {
+                    Toast.makeText(
+                            LoginActivity.this,
+                            "Fill All Fields",
+                            Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(
+                        LoginActivity.this,
+                        "Login Fail",
+                        Toast.LENGTH_LONG).show();
+            }
+
         } else if (category_no == 1) {
             Intent i = new Intent(LoginActivity.this, Retails_Home.class);
             startActivity(i);

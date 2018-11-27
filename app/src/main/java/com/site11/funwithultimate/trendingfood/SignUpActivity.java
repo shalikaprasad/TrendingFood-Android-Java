@@ -43,7 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
     Spinner province,district,town;
     //private static final int SELECT_PHOTO = 100;
 
-
     private EditText signusername,signuseremail,signuserpass,signuserpass2;
     private ProgressBar signloadingprogress;
     private RadioGroup radiocatogerygroup;
@@ -178,7 +177,10 @@ public class SignUpActivity extends AppCompatActivity {
                     try {
                         CreateUserAccount(setemail,setname,setpass,usercharactor,userprovince,userdistrict,usertown);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Toast.makeText(
+                                SignUpActivity.this,
+                                "Create Account is Failed",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -364,6 +366,11 @@ public class SignUpActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE && data != null){
             pickeduri = data.getData();
             userphoto.setImageURI(pickeduri);
+        }else{
+            Toast.makeText(
+                    SignUpActivity.this,
+                    "Set Image Failed",
+                    Toast.LENGTH_LONG).show();
         }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
