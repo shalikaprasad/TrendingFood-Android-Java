@@ -6,21 +6,37 @@
     <group android:id="@+id/menu_topf"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/navside_addnewpost_farmer"
+            android:icon="@drawable/add_post"
+            android:title="Add New Post" />
+        <item
+            android:id="@+id/navside_profile_farmer"
+            android:icon="@drawable/find_people"
+            android:title="Profile" />
+        <item
             android:id="@+id/navside_home_farmer"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/home"
             android:title="Home" />
         <item
             android:id="@+id/navside_friends_farmer"
-            android:icon="@drawable/ic_contacts"
+            android:icon="@drawable/friends"
             android:title="Friends" />
         <item
             android:id="@+id/navside_message_farmer"
-            android:icon="@drawable/ic_message"
+            android:icon="@drawable/message"
             android:title="Message" />
         <item
             android:id="@+id/navside_notification_farmer"
             android:icon="@drawable/ic_notifications"
             android:title="Notifications" />
+        <item
+            android:id="@+id/navside_setting_farmer"
+            android:icon="@drawable/settings"
+            android:title="Setting" />
+        <item
+            android:id="@+id/navside_logout_farmer"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
     </group>
 
     <group

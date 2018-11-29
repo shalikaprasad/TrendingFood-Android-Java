@@ -289,17 +289,96 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
 
         } else if (category_no == 1) {
-            Intent i = new Intent(LoginActivity.this, Retails_Home.class);
-            startActivity(i);
+
+            final String email = loguser.getText().toString();
+            final String password = logpass.getText().toString();
+
+            try {
+
+                if (password.length() > 0 && email.length() > 0) {
+
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(
+                                                LoginActivity.this,
+                                                "Authentication Failed",
+                                                Toast.LENGTH_LONG).show();
+
+                                    } else {
+                                        Toast.makeText(
+                                                LoginActivity.this,
+                                                "Login Successfully",
+                                                Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(LoginActivity.this, Retails_Home.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                }
+                            });
+                } else {
+                    Toast.makeText(
+                            LoginActivity.this,
+                            "Fill All Fields",
+                            Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(
+                        LoginActivity.this,
+                        "Login Fail",
+                        Toast.LENGTH_LONG).show();
+
+            }
         } else if (category_no == 2) {
-            Intent i = new Intent(LoginActivity.this, Consumer_Home.class);
-            startActivity(i);
+            final String email = loguser.getText().toString();
+            final String password = logpass.getText().toString();
+
+            try {
+
+                if (password.length() > 0 && email.length() > 0) {
+
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(
+                                                LoginActivity.this,
+                                                "Authentication Failed",
+                                                Toast.LENGTH_LONG).show();
+
+                                    } else {
+                                        Toast.makeText(
+                                                LoginActivity.this,
+                                                "Login Successfully",
+                                                Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(LoginActivity.this, Consumer_Home.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                }
+                            });
+                } else {
+                    Toast.makeText(
+                            LoginActivity.this,
+                            "Fill All Fields",
+                            Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(
+                        LoginActivity.this,
+                        "Login Fail",
+                        Toast.LENGTH_LONG).show();
+            }
+
         }
 
+
     }
-
-
-
 
     /////////////////////////////////////////////
     //////////Back Button////////////////////////

@@ -36,11 +36,14 @@ public class Farmers_Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmers__home);
+
+        //add tool bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home");
 
 
-
+        //add navigation bar
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -154,13 +157,23 @@ public class Farmers_Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.navside_home_farmer) {
+        if (id == R.id.navside_addnewpost_farmer) {
             // Handle the camera action
-        } else if (id == R.id.navside_friends_farmer) {
+        } else if (id == R.id.navside_profile_farmer) {
 
-        } else if (id == R.id.navside_message_farmer) {
+        }else if (id == R.id.navside_friends_farmer) {
+
+        }else if (id == R.id.navside_home_farmer) {
+
+        }else if (id == R.id.navside_friends_farmer) {
+
+        }else if (id == R.id.navside_message_farmer) {
 
         } else if (id == R.id.navside_notification_farmer) {
+
+        }else if (id == R.id.navside_setting_farmer) {
+
+        }else if (id == R.id.navside_logout_farmer) {
 
         } else if (id == R.id.navside_saved_farmer) {
 
