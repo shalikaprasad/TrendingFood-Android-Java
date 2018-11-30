@@ -46,7 +46,8 @@
                 android:text="Login"
                 android:textColor="#000000"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAllCaps="true"/>
 
             <LinearLayout
                 android:id="@+id/linlay1"

@@ -282,6 +282,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                     "Login Successfully",
                                                     Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(LoginActivity.this, Farmers_Home.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
                                             loadingBar.dismiss();
                                             finish();
