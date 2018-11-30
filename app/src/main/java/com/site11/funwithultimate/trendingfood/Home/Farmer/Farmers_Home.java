@@ -18,7 +18,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.site11.funwithultimate.trendingfood.LoginActivity;
 import com.site11.funwithultimate.trendingfood.Profile_Activity;
 import com.site11.funwithultimate.trendingfood.R;
 
@@ -32,10 +41,19 @@ public class Farmers_Home extends AppCompatActivity
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference UsersRef, PostsRef;
+    String currentUserID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmers__home);
+
+        //Firebase
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         //add tool bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -113,8 +131,25 @@ public class Farmers_Home extends AppCompatActivity
             }
         });
     }
+/*
+    //Firebase check current user is be or null
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        if(currentUser == null)
+        {
+            SendUserToLoginActivity();
+        }
+        else
+        {
+            CheckUserExistence();
+        }
+    }
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,6 +209,9 @@ public class Farmers_Home extends AppCompatActivity
         }else if (id == R.id.navside_setting_farmer) {
 
         }else if (id == R.id.navside_logout_farmer) {
+            mAuth.signOut();
+            SendUserToLoginActivity();
+            Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.navside_saved_farmer) {
 
@@ -188,6 +226,44 @@ public class Farmers_Home extends AppCompatActivity
         return true;
     }
 
+    private void SendUserToLoginActivity()
+    {
+        Intent loginIntent = new Intent(Farmers_Home.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        finish();
+    }
+    /*
+      private void CheckUserExistence()
+      {
+          final String current_user_id = mAuth.getCurrentUser().getUid();
+
+          UsersRef.addValueEventListener(new ValueEventListener() {
+              @Override
+              public void onDataChange(DataSnapshot dataSnapshot)
+              {
+                  if(!dataSnapshot.hasChild(current_user_id))
+                  {
+                      SendUserToSetupActivity();
+                  }
+              }
+
+              @Override
+              public void onCancelled(DatabaseError databaseError) {
+
+              }
+          });
+      }
+
+
+      private void SendUserToSetupActivity()
+      {
+          Intent setupIntent = new Intent(Farmers_Home.this, Profile_Activity.class);
+          setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+          startActivity(setupIntent);
+          finish();
+      }
+  */
     private void setFragment(Fragment fragment) {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

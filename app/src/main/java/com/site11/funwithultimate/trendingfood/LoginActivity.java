@@ -1,6 +1,7 @@
 package com.site11.funwithultimate.trendingfood;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -48,18 +50,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private static final int PERMISSION_SIGN_IN = 9999;
     GoogleApiClient googleClient;
-    SignInButton signInButton;
+    ImageView signInButton;
     FirebaseAuth firebaseAuth;
 
     //Create Dialog Box
     AlertDialog waitingDialog;
     RelativeLayout rellay1, rellay2;
     Spinner category;
-    int category_no = 0;
+    int category_no = -1;
     boolean connected;
 
     EditText loguser,logpass;
-
+    private ProgressDialog loadingBar;
 
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -131,12 +133,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
         rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
         category = (Spinner) findViewById(R.id.category);
-        signInButton = (SignInButton) findViewById(R.id.google_sign) ;
+        signInButton = (ImageView) findViewById(R.id.google_sign) ;
         handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
 
         loguser = findViewById(R.id.logusermaneedit);
         logpass = findViewById(R.id.logpasswordedit);
-
+        loadingBar = new ProgressDialog(this);
 
 
 
@@ -244,135 +246,123 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     //////////Open Home activity/////////////////
     /////////////////////////////////////////////
 
+
     public void loginbtn(View view) {
-        if (category_no == 0) {
-            final String email = loguser.getText().toString();
-            final String password = logpass.getText().toString();
 
-            try {
+        final String email = loguser.getText().toString();
+        final String password = logpass.getText().toString();
 
-                if (password.length() > 0 && email.length() > 0) {
 
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (!task.isSuccessful()) {
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "Authentication Failed",
-                                                Toast.LENGTH_LONG).show();
+        if(password.length() == 0 && email.length() == 0){
+            Toast.makeText(LoginActivity.this, "Fill All Fields", Toast.LENGTH_LONG).show();
+        }else if(category_no == -1){
+            Toast.makeText(this, "Please Select Your Category", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            if (category_no == 0) {
 
-                                    } else {
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "Login Successfully",
-                                                Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(LoginActivity.this, Farmers_Home.class);
-                                        startActivity(intent);
-                                        finish();
+                try {
+                        loadingBar.setTitle("Login Your Account");
+                        loadingBar.setMessage("Please wait, while we are logging your Account...");
+                        loadingBar.show();
+                        loadingBar.setCanceledOnTouchOutside(true);
+                        firebaseAuth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (!task.isSuccessful()) {
+                                            String message = task.getException().getMessage();
+                                            Toast.makeText(LoginActivity.this, "Error Occured: " + message, Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+
+                                        } else {
+                                            loadingBar.dismiss();
+                                            Toast.makeText(
+                                                    LoginActivity.this,
+                                                    "Login Successfully",
+                                                    Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(LoginActivity.this, Farmers_Home.class);
+                                            startActivity(intent);
+                                            loadingBar.dismiss();
+                                            finish();
+                                        }
+
                                     }
+                                });
 
-                                }
-                            });
-                } else {
+                } catch (Exception e) {
+                    Toast.makeText(LoginActivity.this, "Error Occured: " + e, Toast.LENGTH_SHORT).show();
+                }
+
+            } else if (category_no == 1) {
+
+                try {
+
+                        firebaseAuth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (!task.isSuccessful()) {
+                                            Toast.makeText(
+                                                    LoginActivity.this,
+                                                    "Authentication Failed",
+                                                    Toast.LENGTH_LONG).show();
+
+                                        } else {
+                                            Toast.makeText(
+                                                    LoginActivity.this,
+                                                    "Login Successfully",
+                                                    Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(LoginActivity.this, Retails_Home.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
+                                    }
+                                });
+
+                } catch (Exception e) {
                     Toast.makeText(
                             LoginActivity.this,
-                            "Fill All Fields",
+                            "Login Fail",
                             Toast.LENGTH_LONG).show();
+
                 }
-            } catch (Exception e) {
-                Toast.makeText(
-                        LoginActivity.this,
-                        "Login Fail",
-                        Toast.LENGTH_LONG).show();
-            }
+            } else if (category_no == 2) {
 
-        } else if (category_no == 1) {
 
-            final String email = loguser.getText().toString();
-            final String password = logpass.getText().toString();
+                try {
 
-            try {
+                        firebaseAuth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (!task.isSuccessful()) {
+                                            Toast.makeText(
+                                                    LoginActivity.this,
+                                                    "Authentication Failed",
+                                                    Toast.LENGTH_LONG).show();
 
-                if (password.length() > 0 && email.length() > 0) {
+                                        } else {
+                                            Toast.makeText(
+                                                    LoginActivity.this,
+                                                    "Login Successfully",
+                                                    Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(LoginActivity.this, Consumer_Home.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
 
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (!task.isSuccessful()) {
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "Authentication Failed",
-                                                Toast.LENGTH_LONG).show();
-
-                                    } else {
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "Login Successfully",
-                                                Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(LoginActivity.this, Retails_Home.class);
-                                        startActivity(intent);
-                                        finish();
                                     }
+                                });
 
-                                }
-                            });
-                } else {
+                } catch (Exception e) {
                     Toast.makeText(
                             LoginActivity.this,
-                            "Fill All Fields",
+                            "Login Fail",
                             Toast.LENGTH_LONG).show();
                 }
-            } catch (Exception e) {
-                Toast.makeText(
-                        LoginActivity.this,
-                        "Login Fail",
-                        Toast.LENGTH_LONG).show();
 
-            }
-        } else if (category_no == 2) {
-            final String email = loguser.getText().toString();
-            final String password = logpass.getText().toString();
-
-            try {
-
-                if (password.length() > 0 && email.length() > 0) {
-
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (!task.isSuccessful()) {
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "Authentication Failed",
-                                                Toast.LENGTH_LONG).show();
-
-                                    } else {
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "Login Successfully",
-                                                Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(LoginActivity.this, Consumer_Home.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-
-                                }
-                            });
-                } else {
-                    Toast.makeText(
-                            LoginActivity.this,
-                            "Fill All Fields",
-                            Toast.LENGTH_LONG).show();
-                }
-            } catch (Exception e) {
-                Toast.makeText(
-                        LoginActivity.this,
-                        "Login Fail",
-                        Toast.LENGTH_LONG).show();
             }
 
         }

@@ -57,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-
+    private boolean setimagesuccess = false;
 
 
     Handler handler = new Handler();
@@ -169,11 +169,26 @@ public class SignUpActivity extends AppCompatActivity {
                 final String setpass = signuserpass.getText().toString();
                 final String setpass2 = signuserpass2.getText().toString();
 
-                if(setemail.isEmpty() || setname.isEmpty() || setpass.isEmpty() || !setpass.equals(setpass2) || usercharactor.isEmpty() ){
+                if(setemail.isEmpty() || setname.isEmpty() || setpass.isEmpty() || usercharactor.isEmpty() ){
                     showMessage("Please Verify all fields");
                     signupbtn.setVisibility(View.VISIBLE);
                     signloadingprogress.setVisibility(View.INVISIBLE);
-                }else {
+                }
+                else if(!setpass.equals(setpass2)){
+                    Toast.makeText(SignUpActivity.this, "Your Password do not match with your Confirm Password...", Toast.LENGTH_SHORT).show();
+                    signupbtn.setVisibility(View.VISIBLE);
+                    signloadingprogress.setVisibility(View.INVISIBLE);
+                }else if(setpass.length() < 6){
+                    Toast.makeText(SignUpActivity.this, "Your Password should be more than 5 Characters ", Toast.LENGTH_SHORT).show();
+                    signupbtn.setVisibility(View.VISIBLE);
+                    signloadingprogress.setVisibility(View.INVISIBLE);
+                }else if (setimagesuccess == false){
+                    Toast.makeText(SignUpActivity.this, "Please Check Your Profile Photo", Toast.LENGTH_SHORT).show();
+                    signupbtn.setVisibility(View.VISIBLE);
+                    signloadingprogress.setVisibility(View.INVISIBLE);
+                }
+                else
+                {
                     try {
                         CreateUserAccount(setemail,setname,setpass,usercharactor,userprovince,userdistrict,usertown);
                     } catch (Exception e) {
@@ -193,7 +208,9 @@ public class SignUpActivity extends AppCompatActivity {
         userphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setimagesuccess = true;
                 if(Build.VERSION.SDK_INT >= 22){
+
                     checkpermission();
                 }else {
                     opengallery();
@@ -247,35 +264,40 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void updateUserInfo(final String setname, Uri pickeduri, final FirebaseUser currentUser) {
 
-        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("user_photos");
-        final StorageReference imageFilePath = mStorage.child(pickeduri.getLastPathSegment());
-        imageFilePath.putFile(pickeduri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //image upload successfull
-                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileupdate =  new UserProfileChangeRequest.Builder()
-                                .setDisplayName(setname)
-                                .setPhotoUri(uri)
-                                .build();
+        try {
+            StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("user_photos");
+            final StorageReference imageFilePath = mStorage.child(pickeduri.getLastPathSegment());
+            imageFilePath.putFile(pickeduri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //image upload successfull
+                    imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            UserProfileChangeRequest profileupdate =  new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(setname)
+                                    .setPhotoUri(uri)
+                                    .build();
 
-                        currentUser.updateProfile(profileupdate)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
+                            currentUser.updateProfile(profileupdate)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
 
-                                            showMessage("Register Complete");
-                                            updateUI();
+                                                showMessage("Register Complete");
+                                                updateUI();
+                                            }
                                         }
-                                    }
-                                });
-                    }
-                });
-            }
-        });
+                                    });
+                        }
+                    });
+                }
+            });
+        }catch (Exception e){
+            Toast.makeText(this, "Please Check Your Profile Photo", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
