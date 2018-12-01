@@ -28,8 +28,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.site11.funwithultimate.trendingfood.LoginActivity;
+import com.site11.funwithultimate.trendingfood.PostActivity;
 import com.site11.funwithultimate.trendingfood.Profile_Activity;
 import com.site11.funwithultimate.trendingfood.R;
+import com.squareup.picasso.Picasso;
 
 public class Farmers_Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +47,8 @@ public class Farmers_Home extends AppCompatActivity
     private DatabaseReference UsersRef, PostsRef;
     String currentUserID;
 
+    TextView nav_usernamepro;
+    ImageView headpro_image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +80,51 @@ public class Farmers_Home extends AppCompatActivity
         ///////////////////////////////////////////////////////////
 
         View headerview = navigationView.getHeaderView(0);
-        ImageView headpro_image = headerview.findViewById(R.id.pro_imagef);
 
-        //set Email
-        TextView nav_txtpro = headerview.findViewById(R.id.twuseremailf);
+        //set Email in Google Signin
+        final TextView nav_txtpro = headerview.findViewById(R.id.twuseremailf);
         nav_txtpro.setText(getIntent().getStringExtra("email"));
+        //////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
+
+
+        //set Username and Profile Image
+        nav_usernamepro = headerview.findViewById(R.id.twusernamef);
+        headpro_image = headerview.findViewById(R.id.pro_imagef);
+
+        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if(dataSnapshot.exists())
+                {
+                    if(dataSnapshot.hasChild("fullname"))
+                    {
+                        String fullname = dataSnapshot.child("fullname").getValue().toString();
+                        nav_usernamepro.setText(fullname);
+                    }
+                    if(dataSnapshot.hasChild("character"))
+                    {
+                        String character = dataSnapshot.child("character").getValue().toString();
+                        nav_txtpro.setText(character);
+                    }
+                    if(dataSnapshot.hasChild("profileimage"))
+                    {
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.get().load(image).placeholder(R.drawable.profile).into(headpro_image);
+                    }
+                    else
+                    {
+                        Toast.makeText(Farmers_Home.this, "Profile name do not exists...", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //set Profile
         headpro_image.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +217,10 @@ public class Farmers_Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.faction_summery) {
+        if(id == R.id.faction_new_post){
+            SendUserToPostActivity();
+        }
+        else if (id == R.id.faction_summery) {
             return true;
         }else if (id == R.id.faction_settings) {
             return true;
@@ -186,6 +233,11 @@ public class Farmers_Home extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void SendUserToPostActivity() {
+        Intent addNewPostIntent = new Intent(Farmers_Home.this, PostActivity.class);
+        startActivity(addNewPostIntent);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -193,7 +245,7 @@ public class Farmers_Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.navside_addnewpost_farmer) {
-            // Handle the camera action
+            SendUserToPostActivity();
         } else if (id == R.id.navside_profile_farmer) {
 
         }else if (id == R.id.navside_friends_farmer) {

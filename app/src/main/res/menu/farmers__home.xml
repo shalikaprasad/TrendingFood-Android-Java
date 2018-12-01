@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/faction_new_post"
+        android:orderInCategory="100"
+        android:title="Add New Post"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/faction_summery"
         android:orderInCategory="100"
         android:title="Summery"
