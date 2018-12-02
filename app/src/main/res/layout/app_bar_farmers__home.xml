@@ -23,7 +23,6 @@
     </android.support.design.widget.AppBarLayout>
 
 
-
     <include
         android:id="@+id/include"
         layout="@layout/content_farmers__home" />

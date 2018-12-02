@@ -170,7 +170,7 @@
                     android:src="@drawable/facebook" />
 
                 <ImageView
-                    android:id="@+id/google_sign"
+                    android:id="@+id/google_signin_button"
                     android:layout_width="55dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"
