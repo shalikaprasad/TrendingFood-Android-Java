@@ -76,10 +76,14 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <!-- optional (needed if default theme has no action bar) -->
 
-        <activity android:name=".PostActivity"
-            android:theme="@style/AppTheme" >
+        <activity
+            android:name=".PostActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ClickPostActivity" />
 
-        </activity>
+        <activity android:name=".SettingActivity"
+            android:parentActivityName=".Home.Farmer.Farmers_Home"
+            ></activity>
     </application>
 
 </manifest>

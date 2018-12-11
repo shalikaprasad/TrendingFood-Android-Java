@@ -26,25 +26,25 @@ public class SliderAdapter extends PagerAdapter {
             R.drawable.managesc
     };
     public String[] slide_heading = {
-          "Farmer",
-          "Seller",
-          "Management"
+          "ගොවියන්",
+          "වෙළඳකරුවන්",
+          "පාරිභෝගිකයන්"
     };
 
     public String[] slide_doc = {
 
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                "when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "ගොවියන්ගේ අස්වනු සදහා සාධරණ මිලක් ලබා දී, සාධාරණ වෙළඳකරුවන් පහසුවෙන් සොයාගැනීමටත්, ඇණවුම " +
+                "වලට අනුව වගා කිරීමට හැකි වීමත්, ඔබගේ වගා ගැටලු සඳහා ඉක්මන් විසදුම් ලබා ගැනීමටත්," +
+                "සහා ඔබ අවට සිටිනා වෙළඳකරුවන් පහසුවෙන් සොයාගැනීමටත් මෙය උපකාරී වේ. ",
 
 
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-                    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                    "when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "වෙළඳකරුවන්ගේ අස්වනු සදහා සාධරණ මිලක් ලබා දී,පාරිභෝගිකයන් පහසුවෙන් සොයාගැනීමටත්, ඇණවුම් " +
+                    "වලට අනුව අස්වනු මීලදී ගැනීමට හැකි වීමත්, ඔබගේ වෙළඳ ගැටලු සඳහා ඉක්මන් විසදුම් ලබා ගැනීමටත්, "+
+                    "සහා ඔබ අවට සිටිනා පාරිභෝගිකයන් පහසුවෙන් සොයාගැනීමටත් මෙය උපකාරී වේ. ",
 
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-            "when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            "පාරිභෝගිකයන් අස්වනු සදහා සාධරණ මිලක් ලබා දී, සාධාරණ වෙළඳකරුවන් පහසුවෙන් සොයාගැනීමටත්, ඇණවුම් " +
+                    "කිරීමට හැකි වීමත්, ඔබගේ ගැටලු සඳහා ඉක්මන් විසදුම් ලබා ගැනීමටත්, "+
+                    "සහා ඔබ අවට සිටිනා වෙළඳකරුවන් පහසුවෙන් සොයාගැනීමටත් මෙය උපකාරී වේ. "
     };
     @Override
     public int getCount() {

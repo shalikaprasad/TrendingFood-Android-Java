@@ -103,14 +103,14 @@ public class Profile_Activity extends AppCompatActivity {
         province.setAdapter(provinceAdapter);
 
         ArrayAdapter<String> districtAdapter = new ArrayAdapter<String>(Profile_Activity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.province_array));
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.district_western));
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        district.setAdapter(provinceAdapter);
+        district.setAdapter(districtAdapter);
 
         ArrayAdapter<String> townAdapter = new ArrayAdapter<String>(Profile_Activity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.province_array));
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.town_array));
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        town.setAdapter(provinceAdapter);
+        town.setAdapter(townAdapter);
 
 
         SaveInformationbuttion.setOnClickListener(new View.OnClickListener() {

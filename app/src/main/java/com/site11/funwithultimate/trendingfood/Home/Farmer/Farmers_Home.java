@@ -26,16 +26,19 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.site11.funwithultimate.trendingfood.ClickPostActivity;
 import com.site11.funwithultimate.trendingfood.LoginActivity;
 import com.site11.funwithultimate.trendingfood.PostActivity;
 import com.site11.funwithultimate.trendingfood.Posts;
 import com.site11.funwithultimate.trendingfood.Profile_Activity;
 import com.site11.funwithultimate.trendingfood.R;
+import com.site11.funwithultimate.trendingfood.SettingActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -201,7 +204,8 @@ public class Farmers_Home extends AppCompatActivity
 
     private void DisplayAllUsersPosts()
     {
-        FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Posts, PostsViewHolder>
+        FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Posts, PostsViewHolder>
                         (
                                 Posts.class,
                                 R.layout.all_posts_layout,
@@ -212,16 +216,28 @@ public class Farmers_Home extends AppCompatActivity
                     @Override
                     protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position)
                     {
+                        final String PostKey = getRef(position).getKey();
                         viewHolder.setFullname(model.getFullname());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());
                         viewHolder.setDescription(model.getDescription());
                         viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
                         viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
+
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent clickPostIntent = new Intent(Farmers_Home.this,ClickPostActivity.class);
+                                clickPostIntent.putExtra("PostKey", PostKey);
+                                startActivity(clickPostIntent);
+                            }
+                        });
                     }
                 };
         postList.setAdapter(firebaseRecyclerAdapter);
     }
+
+
 
     public static class PostsViewHolder extends RecyclerView.ViewHolder
     {
@@ -242,7 +258,6 @@ public class Farmers_Home extends AppCompatActivity
         public void setProfileimage(Context ctx, String profileimage)
         {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.post_profile_image);
-            //Picasso.with(ctx).load(profileimage).into(image);
             Picasso.get().load(profileimage).placeholder(R.drawable.profile).into(image);
         }
 
@@ -267,13 +282,57 @@ public class Farmers_Home extends AppCompatActivity
         public void setPostimage(Context ctx1,  String postimage)
         {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.post_image);
-            //Picasso.with(ctx1).load(postimage).into(PostImage);
             Picasso.get().load(postimage).placeholder(R.drawable.profile).into(PostImage);
+        }
+    }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null)
+        {
+            SendUserToLoginActivity();
+        }
+        else
+        {
+            CheckUserExistence();
         }
     }
 
 
+
+    private void CheckUserExistence()
+    {
+        final String current_user_id = mAuth.getCurrentUser().getUid();
+
+        UsersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if(!dataSnapshot.hasChild(current_user_id))
+                {
+                    SendUserToSetupActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void SendUserToSetupActivity()
+    {
+        Intent setupIntent = new Intent(Farmers_Home.this, Profile_Activity.class);
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
+    }
     /*
     //Firebase check current user is be or null
     @Override
@@ -358,6 +417,7 @@ public class Farmers_Home extends AppCompatActivity
         } else if (id == R.id.navside_notification_farmer) {
 
         }else if (id == R.id.navside_setting_farmer) {
+            SendUserToSettingActivity();
 
         }else if (id == R.id.navside_logout_farmer) {
             mAuth.signOut();
@@ -384,6 +444,15 @@ public class Farmers_Home extends AppCompatActivity
         startActivity(loginIntent);
         finish();
     }
+
+    private void SendUserToSettingActivity()
+    {
+        Intent setupIntent = new Intent(Farmers_Home.this, SettingActivity.class);
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
+    }
+
     /*
       private void CheckUserExistence()
       {

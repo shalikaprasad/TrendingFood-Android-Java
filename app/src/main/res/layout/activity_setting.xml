@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register"
+    tools:context=".SettingActivity">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/settings_profile_image"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/profile"/>
+
+            <EditText
+                android:id="@+id/settings_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings_profile_image"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/inputs"
+                android:hint="profile_status"
+                android:textColor="@android:color/background_dark"
+                android:padding="30dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                />
+
+            <EditText
+                android:id="@+id/settings_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings_status"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="username"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                />
+
+            <EditText
+                android:id="@+id/setting_profile_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings_username"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="profile name"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+
+            <EditText
+                android:id="@+id/setting_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_profile_full_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="country"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+
+            <EditText
+                android:id="@+id/setting_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_country"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="Date of Birth"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+
+            <EditText
+                android:id="@+id/setting_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_dob"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="Gender"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+
+            <EditText
+                android:id="@+id/setting_relationship_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_gender"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="Relationship Status"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+            <EditText
+                android:id="@+id/setting_character"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_gender"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="Character"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+            <EditText
+                android:id="@+id/setting_province"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_gender"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="Province"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+            <EditText
+                android:id="@+id/setting_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_gender"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="District"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+            <EditText
+                android:id="@+id/setting_town"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setting_gender"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/inputs"
+                android:hint="Town"
+                android:textColor="@android:color/background_dark"
+                android:padding="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                />
+
+            <Button
+                android:id="@+id/update_account_setting_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/setting_relationship_status"
+                android:text="Update Account Setting"
+                android:background="@drawable/button"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                />
+
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

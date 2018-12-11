@@ -37,7 +37,7 @@
     </string-array>
 
     <string-array name="town_array">
-        <item>Please select your province</item>
+        <item>Please select your town</item>
         <item>Western</item>
         <item>Northern</item>
         <item>North Western	</item>
@@ -50,7 +50,7 @@
     </string-array>
 
     <string-array name="category">
-        <item>Please select your district</item>
+        <item>Please select your Character</item>
         <item>Farmer</item>
         <item>Retailer</item>
         <item>Consumer	</item>
