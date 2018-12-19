@@ -80,10 +80,10 @@
             android:name=".PostActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".ClickPostActivity" />
-
-        <activity android:name=".SettingActivity"
-            android:parentActivityName=".Home.Farmer.Farmers_Home"
-            ></activity>
+        <activity
+            android:name=".SettingActivity"
+            android:parentActivityName=".Home.Farmer.Farmers_Home" />
+        <activity android:name=".Profile2Activity"></activity>
     </application>
 
 </manifest>

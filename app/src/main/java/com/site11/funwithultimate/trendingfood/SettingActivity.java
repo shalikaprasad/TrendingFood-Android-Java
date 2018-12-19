@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +30,6 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.theartofdev.edmodo.cropper.CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE;
@@ -40,7 +38,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private Button UpdateAccountSettingButton;
     private CircleImageView userProfImage;
-    private EditText userName, userProfName, userStatus, userCountry, userGender, userRelation, userDOB,userCharacter,userProvince,userDistrict,userTown;
+    private EditText userName, userProfName, userStatus, userGender, userRelation, userDOB,userCharacter,userProvince,userDistrict,userTown;
 
     private DatabaseReference SettinguserRef;
     private FirebaseAuth mAuth;
@@ -70,7 +68,6 @@ public class SettingActivity extends AppCompatActivity {
         userName = findViewById(R.id.settings_username);
         userProfName = findViewById(R.id.setting_profile_full_name);
         userStatus = findViewById(R.id.settings_status);
-        userCountry = findViewById(R.id.setting_country);
         userGender = findViewById(R.id.setting_gender);
         userRelation = findViewById(R.id.setting_relationship_status);
         userDOB = findViewById(R.id.setting_dob);
@@ -81,7 +78,6 @@ public class SettingActivity extends AppCompatActivity {
 
         userProfImage = findViewById(R.id.settings_profile_image);
         UpdateAccountSettingButton = findViewById(R.id.update_account_setting_button);
-
 
         SettinguserRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,7 +90,6 @@ public class SettingActivity extends AppCompatActivity {
                     String myProfileName = dataSnapshot.child("fullname").getValue().toString();
                     String myProfileStatus = dataSnapshot.child("status").getValue().toString();
                     String myDOB = dataSnapshot.child("dob").getValue().toString();
-                    String myCountry = dataSnapshot.child("country").getValue().toString();
                     String myGender = dataSnapshot.child("gender").getValue().toString();
                     String myRelationshipStatus = dataSnapshot.child("relationshipstatus").getValue().toString();
                     String myCharacter = dataSnapshot.child("character").getValue().toString();
@@ -108,14 +103,12 @@ public class SettingActivity extends AppCompatActivity {
                     userProfName.setText(myProfileName);
                     userStatus.setText(myProfileStatus);
                     userDOB.setText(myDOB);
-                    userCountry.setText(myCountry);
                     userGender.setText(myGender);
                     userRelation.setText(myRelationshipStatus);
                     userCharacter.setText(myCharacter);
                     userProvince.setText(myProvince);
                     userDistrict.setText(myDistrict);
                     userTown.setText(myTown);
-
 
                 }
             }
@@ -224,7 +217,6 @@ public class SettingActivity extends AppCompatActivity {
         String profileName = userProfName.getText().toString();
         String status = userStatus.getText().toString();
         String dob = userDOB.getText().toString();
-        String country = userCountry.getText().toString();
         String gender = userGender.getText().toString();
         String relation = userRelation.getText().toString();
         String character = userCharacter.getText().toString();
@@ -240,8 +232,6 @@ public class SettingActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write your status", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(dob)){
             Toast.makeText(this, "Please write your dob", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(country)){
-            Toast.makeText(this, "Please write your country", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(gender)){
             Toast.makeText(this, "Please write your gender", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(relation)){
@@ -260,28 +250,27 @@ public class SettingActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-            UpdateAccountInfo(username,profileName,status,dob,country,gender,relation,character,userprovince,userdistrict,usertown);
+            UpdateAccountInfo(username,profileName,status,dob,gender,relation,character,userprovince,userdistrict,usertown);
         }
 
 
 
     }
 
-    private void UpdateAccountInfo(String username, String profileName, String status, String dob, String country, String gender, String relation,String character,String userprovince,String userdistrict,String usertown) {
+    private void UpdateAccountInfo(String username, String profileName, String status, String dob, String gender, String relation,String character,String userprovince,String userdistrict,String usertown) {
 
         HashMap userMap = new HashMap();
+
         userMap.put("username", username);
         userMap.put("fullname", profileName);
         userMap.put("status", status);
         userMap.put("dob", dob);
-        userMap.put("country", country);
         userMap.put("gender", gender);
         userMap.put("relationshipstatus", relation);
         userMap.put("character", character);
         userMap.put("userprovince", userprovince);
         userMap.put("userdistrict", userdistrict);
         userMap.put("usertown", usertown);
-
 
         SettinguserRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
             @Override

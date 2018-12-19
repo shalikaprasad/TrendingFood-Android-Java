@@ -36,6 +36,7 @@ import com.site11.funwithultimate.trendingfood.ClickPostActivity;
 import com.site11.funwithultimate.trendingfood.LoginActivity;
 import com.site11.funwithultimate.trendingfood.PostActivity;
 import com.site11.funwithultimate.trendingfood.Posts;
+import com.site11.funwithultimate.trendingfood.Profile2Activity;
 import com.site11.funwithultimate.trendingfood.Profile_Activity;
 import com.site11.funwithultimate.trendingfood.R;
 import com.site11.funwithultimate.trendingfood.SettingActivity;
@@ -396,6 +397,13 @@ public class Farmers_Home extends AppCompatActivity
         startActivity(addNewPostIntent);
     }
 
+    private void SendUserToProfile2Activity()
+    {
+        Intent profileIntent = new Intent(Farmers_Home.this, Profile2Activity.class);
+        //profileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(profileIntent);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -405,7 +413,7 @@ public class Farmers_Home extends AppCompatActivity
         if (id == R.id.navside_addnewpost_farmer) {
             SendUserToPostActivity();
         } else if (id == R.id.navside_profile_farmer) {
-
+            SendUserToProfile2Activity();
         }else if (id == R.id.navside_friends_farmer) {
 
         }else if (id == R.id.navside_home_farmer) {
