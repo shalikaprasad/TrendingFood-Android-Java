@@ -83,7 +83,11 @@
         <activity
             android:name=".SettingActivity"
             android:parentActivityName=".Home.Farmer.Farmers_Home" />
-        <activity android:name=".Profile2Activity"></activity>
+        <activity android:name=".Profile2Activity" />
+        <activity
+            android:name=".FindFriendActivity"
+            android:parentActivityName=".Home.Farmer.Farmers_Home">
+        </activity>
     </application>
 
 </manifest>

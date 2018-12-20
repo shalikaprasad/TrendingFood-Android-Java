@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.site11.funwithultimate.trendingfood.ClickPostActivity;
+import com.site11.funwithultimate.trendingfood.FindFriendActivity;
 import com.site11.funwithultimate.trendingfood.LoginActivity;
 import com.site11.funwithultimate.trendingfood.PostActivity;
 import com.site11.funwithultimate.trendingfood.Posts;
@@ -404,6 +405,13 @@ public class Farmers_Home extends AppCompatActivity
         startActivity(profileIntent);
     }
 
+    private void SendUserToFindFriendActivity()
+    {
+        Intent friendIntent = new Intent(Farmers_Home.this, FindFriendActivity.class);
+        //profileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(friendIntent);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -414,11 +422,10 @@ public class Farmers_Home extends AppCompatActivity
             SendUserToPostActivity();
         } else if (id == R.id.navside_profile_farmer) {
             SendUserToProfile2Activity();
-        }else if (id == R.id.navside_friends_farmer) {
-
         }else if (id == R.id.navside_home_farmer) {
 
         }else if (id == R.id.navside_friends_farmer) {
+            SendUserToFindFriendActivity();
 
         }else if (id == R.id.navside_message_farmer) {
 
