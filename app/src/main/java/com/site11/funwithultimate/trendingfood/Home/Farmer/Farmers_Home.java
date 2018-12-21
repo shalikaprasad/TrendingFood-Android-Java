@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -244,11 +245,17 @@ public class Farmers_Home extends AppCompatActivity
     public static class PostsViewHolder extends RecyclerView.ViewHolder
     {
         View mView;
+        ImageButton like_post_button, comment_post_button;
+        TextView display_no_like;
 
         public PostsViewHolder(View itemView)
         {
             super(itemView);
             mView = itemView;
+
+            like_post_button = mView.findViewById(R.id.like_button);
+            comment_post_button = mView.findViewById(R.id.comment_button);
+            display_no_like = mView.findViewById(R.id.display_no_of_likes);
         }
 
         public void setFullname(String fullname)
