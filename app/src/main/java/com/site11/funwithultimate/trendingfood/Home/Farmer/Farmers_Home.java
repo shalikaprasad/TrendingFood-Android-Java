@@ -57,11 +57,12 @@ public class Farmers_Home extends AppCompatActivity
     private FrameLayout frameLayout;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef, PostsRef;
+    private DatabaseReference UsersRef, PostsRef, LikesRef;
     String currentUserID;
 
     TextView nav_usernamepro;
     ImageView headpro_image;
+    Boolean likeChecker;
 
     private RecyclerView postList;
     @Override
@@ -74,6 +75,7 @@ public class Farmers_Home extends AppCompatActivity
         currentUserID = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
         //add tool bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -235,6 +237,35 @@ public class Farmers_Home extends AppCompatActivity
                                 startActivity(clickPostIntent);
                             }
                         });
+
+                        viewHolder.setLikeButtonStatus(PostKey);
+                        viewHolder.like_post_button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                likeChecker = true;
+
+                                LikesRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(likeChecker.equals(true)){
+                                            if(dataSnapshot.child(PostKey).hasChild(currentUserID)){
+                                                LikesRef.child(PostKey).child(currentUserID).removeValue();
+                                                likeChecker = false;
+                                            }else {
+                                                LikesRef.child(PostKey).child(currentUserID).setValue(true);
+                                                likeChecker = false;
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        });
                     }
                 };
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -248,6 +279,10 @@ public class Farmers_Home extends AppCompatActivity
         ImageButton like_post_button, comment_post_button;
         TextView display_no_like;
 
+        int countLikes;
+        String currentUserId;
+        DatabaseReference LikesRef;
+
         public PostsViewHolder(View itemView)
         {
             super(itemView);
@@ -256,6 +291,32 @@ public class Farmers_Home extends AppCompatActivity
             like_post_button = mView.findViewById(R.id.like_button);
             comment_post_button = mView.findViewById(R.id.comment_button);
             display_no_like = mView.findViewById(R.id.display_no_of_likes);
+
+            LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+            currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+        public void setLikeButtonStatus(final String postKey) {
+
+            LikesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(postKey).hasChild(currentUserId)){
+                        countLikes = (int) dataSnapshot.child(postKey).getChildrenCount();
+                        like_post_button.setImageResource(R.drawable.like);
+                        display_no_like.setText((Integer.toString(countLikes)) + (" Likes"));
+                    }else {
+                        countLikes = (int) dataSnapshot.child(postKey).getChildrenCount();
+                        like_post_button.setImageResource(R.drawable.dislike);
+                        display_no_like.setText((Integer.toString(countLikes)) + (" Likes"));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 
         public void setFullname(String fullname)
