@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
-
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -36,14 +35,14 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
     //firebase core
-    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
     //firebase Auth
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     //firebase Storage
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     //firebase Database
-    implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'com.google.firebase:firebase-database:16.0.6'
     //Circular Image
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //Crop Image
@@ -52,5 +51,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     //add firebase ui
     implementation 'com.firebaseui:firebase-ui-database:2.1.1'
+    //Geo Location
+    implementation 'com.firebase:geofire-android:2.1.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

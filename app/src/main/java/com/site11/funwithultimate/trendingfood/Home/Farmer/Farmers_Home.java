@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,8 +35,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.site11.funwithultimate.trendingfood.ClickPostActivity;
+import com.site11.funwithultimate.trendingfood.CustomerMapActivity;
 import com.site11.funwithultimate.trendingfood.FindFriendActivity;
 import com.site11.funwithultimate.trendingfood.LoginActivity;
+import com.site11.funwithultimate.trendingfood.MapsActivity;
 import com.site11.funwithultimate.trendingfood.PostActivity;
 import com.site11.funwithultimate.trendingfood.Posts;
 import com.site11.funwithultimate.trendingfood.Profile2Activity;
@@ -43,6 +46,8 @@ import com.site11.funwithultimate.trendingfood.Profile_Activity;
 import com.site11.funwithultimate.trendingfood.R;
 import com.site11.funwithultimate.trendingfood.SettingActivity;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -205,6 +210,7 @@ public class Farmers_Home extends AppCompatActivity
         postList.setLayoutManager(linearLayoutManager);
 
         DisplayAllUsersPosts();
+
     }
 
     private void DisplayAllUsersPosts()
@@ -271,6 +277,40 @@ public class Farmers_Home extends AppCompatActivity
         postList.setAdapter(firebaseRecyclerAdapter);
     }
 
+    public void maplocatebtn(View view) {
+
+        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if(dataSnapshot.exists())
+                {
+                    String userCharacter = dataSnapshot.child("character").getValue().toString();
+
+                    if(userCharacter.equals("Farmer")) {
+                        Intent clickCusMapIntent1 = new Intent(Farmers_Home.this, CustomerMapActivity.class);
+                        startActivity(clickCusMapIntent1);
+                    }
+                    else if(userCharacter.equals("Consumer")) {
+                        Intent clickCusMapIntent2 = new Intent(Farmers_Home.this, CustomerMapActivity.class);
+                        startActivity(clickCusMapIntent2);
+                    }
+                    else if(userCharacter.equals("Retailer")) {
+                        Intent clickMapIntent = new Intent(Farmers_Home.this, MapsActivity.class);
+                        startActivity(clickMapIntent);
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
     public static class PostsViewHolder extends RecyclerView.ViewHolder
