@@ -51,8 +51,9 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Farmers_Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+
+public class Farmers_Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 
     private Home_Farmer_Fragment home_farmer_fragment;
     private UP_Farmer_Fragment up_farmer_fragment;
@@ -238,7 +239,7 @@ public class Farmers_Home extends AppCompatActivity
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent clickPostIntent = new Intent(Farmers_Home.this,ClickPostActivity.class);
+                                Intent clickPostIntent = new Intent(Farmers_Home.this, ClickPostActivity.class);
                                 clickPostIntent.putExtra("PostKey", PostKey);
                                 startActivity(clickPostIntent);
                             }

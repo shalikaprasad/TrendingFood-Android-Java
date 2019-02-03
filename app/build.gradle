@@ -58,5 +58,9 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+
+    // volley http library
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.google.code.gson:gson:2.6.2'
 }
 apply plugin: 'com.google.gms.google-services'

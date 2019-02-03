@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 
 import com.site11.funwithultimate.trendingfood.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Home_Farmer_Fragment extends Fragment {
 
 
@@ -20,11 +17,17 @@ public class Home_Farmer_Fragment extends Fragment {
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home__farmer, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_home__farmer, container, false);
+
+
+
+        return view;
     }
+
 
 }

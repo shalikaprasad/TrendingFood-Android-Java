@@ -8,20 +8,6 @@
     android:background="@color/mainBackground"
     >
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/nav_barf"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:menu="@menu/nav_item_farmer">
-
-
-    </android.support.design.widget.BottomNavigationView>
-
     <FrameLayout
         android:id="@+id/frame_layoutf"
         android:layout_width="match_parent"
@@ -29,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="48dp"
-        android:layout_above="@id/nav_barf">
+        android:layout_above="@id/nav_barf"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/all_users_post_list"
@@ -47,8 +34,22 @@
             app:backgroundTint="#C80000"
             app:elevation="10dp"/>
 
-
     </FrameLayout>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/nav_barf"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:menu="@menu/nav_item_farmer">
+
+    </android.support.design.widget.BottomNavigationView>
+
 
 
 </RelativeLayout>
