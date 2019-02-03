@@ -39,17 +39,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static final String TAG = "LoginActivity";
 
 
-    private ImageView googleSignInButton;
+//    private ImageView googleSignInButton;
     FirebaseAuth firebaseAuth;
 
     //Create Dialog Box
     AlertDialog waitingDialog;
     RelativeLayout rellay1, rellay2;
-    Spinner category;
+//    Spinner category;
     int category_no = -1;
     boolean connected;
 
-    EditText loguser,logpass;
+    EditText loguser,logpass,shopname;
     private ProgressDialog loadingBar;
 
     Handler handler = new Handler();
@@ -67,9 +67,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
-        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
-        category = (Spinner) findViewById(R.id.category);
+        rellay1 = findViewById(R.id.rellay1);
+        rellay2 = findViewById(R.id.rellay2);
+//        category = findViewById(R.id.category);
 
 
         //googleSignInButton = findViewById(R.id.google_signin_button);
@@ -78,6 +78,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         loguser = findViewById(R.id.logusermaneedit);
         logpass = findViewById(R.id.logpasswordedit);
+//        shopname = findViewById(R.id.shopnameedit);
+
         loadingBar = new ProgressDialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -99,28 +101,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //////////Select Category/////////////////////
         //////////////////////////////////////////////
 
-        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(LoginActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.category));
-        provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(provinceAdapter);
-
-        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 1) {
-                    category_no = 0;
-                } else if (i == 2) {
-                    category_no = 1;
-                } else if (i == 3) {
-                    category_no = 2;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(LoginActivity.this,
+//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.category));
+//        provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        category.setAdapter(provinceAdapter);
+//
+//        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (i == 1) {
+//                    category_no = 0;
+//                } else if (i == 2) {
+//                    category_no = 1;
+//                } else if (i == 3) {
+//                    category_no = 2;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
         waitingDialog = new SpotsDialog.Builder().setContext(this)
                 .setMessage("Please wait...")
@@ -285,7 +287,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             Toast.makeText(this, "Please Select Your Category", Toast.LENGTH_SHORT).show();
         }
         else{
-            if (category_no == 0) {
+
 
                 try {
                         loadingBar.setTitle("Login Your Account");
@@ -305,7 +307,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             loadingBar.dismiss();
                                             Toast.makeText(
                                                     LoginActivity.this,
-                                                    "Login Successfully",
+                                                    "සාදරයෙන් පිලිගන්නවා!",
                                                     Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(LoginActivity.this, Farmers_Home.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -321,76 +323,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     Toast.makeText(LoginActivity.this, "Error Occured: " + e, Toast.LENGTH_SHORT).show();
                 }
 
-            } else if (category_no == 1) {
 
-                try {
-
-                        firebaseAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()) {
-                                            Toast.makeText(
-                                                    LoginActivity.this,
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_LONG).show();
-
-                                        } else {
-                                            Toast.makeText(
-                                                    LoginActivity.this,
-                                                    "Login Successfully",
-                                                    Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(LoginActivity.this, Retails_Home.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-
-                                    }
-                                });
-
-                } catch (Exception e) {
-                    Toast.makeText(
-                            LoginActivity.this,
-                            "Login Fail",
-                            Toast.LENGTH_LONG).show();
-
-                }
-            } else if (category_no == 2) {
-
-
-                try {
-
-                        firebaseAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()) {
-                                            Toast.makeText(
-                                                    LoginActivity.this,
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_LONG).show();
-
-                                        } else {
-                                            Toast.makeText(
-                                                    LoginActivity.this,
-                                                    "Login Successfully",
-                                                    Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(LoginActivity.this, Consumer_Home.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-
-                                    }
-                                });
-
-                } catch (Exception e) {
-                    Toast.makeText(
-                            LoginActivity.this,
-                            "Login Fail",
-                            Toast.LENGTH_LONG).show();
-                }
-
-            }
 
         }
 

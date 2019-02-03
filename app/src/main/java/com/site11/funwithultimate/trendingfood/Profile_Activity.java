@@ -44,7 +44,7 @@ import static com.theartofdev.edmodo.cropper.CropImage.CROP_IMAGE_ACTIVITY_REQUE
 
 public class Profile_Activity extends AppCompatActivity {
 
-    private EditText UserName, FullName;
+    private EditText UserName, FullName, shopname;
     private Button SaveInformationbuttion;
     private CircleImageView ProfileImage;
     private ProgressDialog loadingBar;
@@ -77,6 +77,7 @@ public class Profile_Activity extends AppCompatActivity {
         district =findViewById(R.id.district);
         town = findViewById(R.id.town);
         radiocatogerygroup = findViewById(R.id.catogeryrg);
+        shopname = findViewById(R.id.setup_shopname);
 
         prellay1 = (RelativeLayout) findViewById(R.id.prellay1);
         handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
@@ -245,6 +246,7 @@ public class Profile_Activity extends AppCompatActivity {
 
         String username = UserName.getText().toString();
         String fullname = FullName.getText().toString();
+        String getshopname = shopname.getText().toString();
 
         // get selected radio button from radioGroup
         int selectedId = radiocatogerygroup.getCheckedRadioButtonId();
@@ -272,6 +274,11 @@ public class Profile_Activity extends AppCompatActivity {
         {
             Toast.makeText(this, "Please select your Character...", Toast.LENGTH_SHORT).show();
         }
+        if(usercharactor.equals("Retailer") && TextUtils.isEmpty(getshopname)){
+
+                Toast.makeText(this, "ඔබගේ වෙළඳ නාමය ඇතුලත් කල යුතුමයි", Toast.LENGTH_SHORT).show();
+
+        }
         else
         {
             loadingBar.setTitle("Saving Information");
@@ -283,6 +290,7 @@ public class Profile_Activity extends AppCompatActivity {
             userMap.put("username", username);
             userMap.put("fullname", fullname);
             userMap.put("character", usercharactor);
+            userMap.put("shopname", getshopname);
             userMap.put("userprovince", userprovince);
             userMap.put("userdistrict", userdistrict);
             userMap.put("usertown", usertown);
